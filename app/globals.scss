@@ -1,0 +1,34 @@
+@import "@radix-ui/themes/styles.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #fafafa;
+  
+  --header: #F0F5FE;
+
+  --font-color-primary: #181D27;
+  --font-color-secondary: white;
+
+  --bg-secondary: #2C58E4;
+  --bg-third: #0B2795;
+  --bg-four: #1536B6;
+  
+  
+  --color-delay: #F97066;
+  --color-today: #4486F4;
+  --color-next: #FDB022;
+  --color-done: #32D583;
+
+  --icon-primary: #C1D7FC;
+  --icon-border: #659CF5;
+}
+
+body {
+  overflow-x: hidden;
+  color: var(--font-color-primary);
+  background: var(--background);
+  font-family: 'Sora', sans-serif;
+}
