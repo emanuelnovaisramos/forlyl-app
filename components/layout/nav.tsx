@@ -13,7 +13,7 @@ export const Nav = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex h-screen flex-col">
       <Header onClickMenu={() => setIsExpand(prev => !prev)} />
-      <div className="flex h-full">
+      <div className="relative flex flex-1 max-h-screen overflow-y-hidden">
         <nav
           className={twMerge(
             'flex w-max justify-between flex-col bg-third min-h-full transition duration-300 ease-in-out',
@@ -56,7 +56,7 @@ export const Nav = ({ children }: { children: React.ReactNode }) => {
             {isExpand && <p>Sair</p>}
           </div>
         </nav>
-        <div className="flex w-full p-7">
+        <div className="flex-1 w-full bg-background overflow-y-auto max-h-screen p-7">
           {children}
         </div>
       </div>

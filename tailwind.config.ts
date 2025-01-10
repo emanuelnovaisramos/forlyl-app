@@ -20,7 +20,8 @@ export default {
         delay: "var(--color-delay)",
         today: "var(--color-today)",
         next: "var(--color-next)",
-        done: "var(--color-done)"
+        done: "var(--color-done)",
+        done2: "var(--color-done2)"
       },
     },
   },
