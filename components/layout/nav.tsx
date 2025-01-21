@@ -1,6 +1,6 @@
 'use client'
 import { navItens } from '@/constants/nav-itens'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { Header } from './header'

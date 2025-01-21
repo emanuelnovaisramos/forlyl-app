@@ -3,13 +3,11 @@ import { DashboardProgressBar } from '@/components/dashboard/dashboardProgressBa
 import { DashboardTableUsersActivity } from '@/components/dashboard/dashboardTableUsersActivity'
 import { PageHeader } from '@/components/layout/pageHeader'
 import { ListTasks } from '@/components/tasks/listTasks'
-import { ProgressBar } from '@/components/ui/progressbar'
 import { FiArrowUpRight, FiFolder } from 'react-icons/fi'
 import { GrFormNextLink } from 'react-icons/gr'
 import { IoMdTime } from 'react-icons/io'
 import { LuChartLine } from 'react-icons/lu'
 import { MdDone } from 'react-icons/md'
-import { RxCounterClockwiseClock } from 'react-icons/rx'
 
 const CARDS = [
   {
