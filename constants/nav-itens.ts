@@ -1,60 +1,25 @@
-import { FiUsers } from 'react-icons/fi';
-import { GoZap } from 'react-icons/go';
-import { HiOutlineArchive } from 'react-icons/hi';
-import { IoIosLink } from 'react-icons/io';
-import { LuChartNoAxesColumn, LuMegaphone, LuRocket, LuSquareChartGantt } from 'react-icons/lu';
-import { MdOutlineFolder } from 'react-icons/md';
-import { RxDashboard } from 'react-icons/rx';
+import { MdOutlineFolder } from 'react-icons/md'
+import { RxDashboard } from 'react-icons/rx'
 
 export const navItens = [
-    {
-        name: 'Dashboard',
-        icon: RxDashboard,
-        href: '/dashboard'
-    },
-    {
-        name: 'Meus Produtos',
-        icon: HiOutlineArchive,
-        href: '/products'
-    },
-    {
-        name: 'Criar Produto',
-        icon: MdOutlineFolder,
-        href: '/products/create'
-    },
-    {
-        name: 'Campanha',
-        icon: LuMegaphone,
-        href: '/campaign'
-    },
-    {
-        name: 'Calendário',
-        icon: LuSquareChartGantt,
-        href: '/calendar'
-    },
-    {
-        name: 'Lançamentos',
-        icon: LuRocket,
-        href: '/launch'
-    },
-    {
-        name: 'Relatórios',
-        icon: LuChartNoAxesColumn,
-        href: '/reports'
-    },
-    {
-        name: 'Parcerias',
-        icon: FiUsers,
-        href: '/partnerships'
-    },
-    {
-        name: 'Anúncios',
-        icon: GoZap,
-        href: '/ads'
-    },
-    {
-        name: 'Links',
-        icon: IoIosLink,
-        href: '/links'
-    }
+  {
+    name: 'Dashboard',
+    icon: RxDashboard,
+    href: '/painel',
+    basePath: '/painel',
+  },
+  {
+    name: 'Meu Projeto',
+    icon: MdOutlineFolder,
+    href: '/projeto/painel',
+    basePath: '/projeto',
+    subRoutes: [
+      { name: 'Dashboard do Projeto', href: '/projeto/painel' },
+      { name: 'Quadro de Tarefas', href: '/projeto/quadro' },
+      { name: 'Cronograma', href: '/projeto/cronograma' },
+      { name: 'Calendário de Posts', href: '/projeto/calendario' },
+      { name: 'Relatório de Métricas', href: '/projeto/relatorio' },
+      { name: 'Organizador de Anúncios', href: '/projeto/anuncios' },
+    ],
+  },
 ]

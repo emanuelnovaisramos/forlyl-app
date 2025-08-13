@@ -10,13 +10,17 @@ import Link from 'next/link'
 export const Nav = ({ children }: { children: React.ReactNode }) => {
   const [isExpand, setIsExpand] = useState(false)
   const pathName = usePathname()
+
+  const subRoutes =
+    navItens.find(item => pathName.startsWith(item.basePath))?.subRoutes || null
+
   return (
     <div className="flex h-screen flex-col">
       <Header onClickMenu={() => setIsExpand(prev => !prev)} />
       <div className="relative flex flex-1 max-h-screen overflow-y-hidden">
         <nav
           className={twMerge(
-            'flex w-max justify-between flex-col bg-third min-h-full transition duration-300 ease-in-out',
+            'flex w-max justify-between flex-col bg-bg-third min-h-full transition duration-300 ease-in-out',
             isExpand ? 'w-64' : 'w-16',
           )}
         >
@@ -26,26 +30,24 @@ export const Nav = ({ children }: { children: React.ReactNode }) => {
                 <li
                   className={twMerge(
                     'flex w-full justify-between cursor-pointer rounded-l-md text-icon-primary hover:text-white',
-                    pathName === item.href ? 'text-white bg-four' : '',
+                    pathName.startsWith(item.basePath) ? 'text-white bg-four' : '',
                   )}
                 >
                   <div className="flex gap-4 h-11 items-center p-3">
-                    <item.icon size={20} className="" />
+                    <item.icon size={20} />
                     {isExpand && (
                       <p
                         className={twMerge(
                           'font-normal',
-                          pathName === item.href && 'font-semibold',
+                          pathName.startsWith(item.basePath) && 'font-semibold',
                         )}
                       >
                         {item.name}
                       </p>
                     )}
                   </div>
-                  {pathName === item.href ? (
+                  {pathName.startsWith(item.basePath) && (
                     <div className="bg-icon-border rounded-l-md w-1 min-h-full"></div>
-                  ) : (
-                    <></>
                   )}
                 </li>
               </Link>
@@ -56,6 +58,19 @@ export const Nav = ({ children }: { children: React.ReactNode }) => {
             {isExpand && <p>Sair</p>}
           </div>
         </nav>
+        {subRoutes && (
+          <div className="flex flex-col gap-7 px-7 py-10 min-w-[270px] h-screen bg-bg-five">
+            {subRoutes.map((route, index) => (
+              <Link
+                key={index}
+                href={route.href}
+                className={`${route.href === pathName ? 'font-bold' : ''} flex items-center gap-2`}
+              >
+                {route.name}
+              </Link>
+            ))}
+          </div>
+        )}
         <div className="flex-1 w-full bg-background overflow-y-auto max-h-screen p-7">
           {children}
         </div>

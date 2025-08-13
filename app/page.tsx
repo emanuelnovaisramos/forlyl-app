@@ -7,7 +7,7 @@ export default function LoginPage() {
   return (
     <div>
       <h2>Aqui vai o login quando tiver</h2>
-      <Button onClick={() => route.push('/signIn')}>Cadastro</Button>
+      <Button onClick={() => route.push('/registro')}>Cadastro</Button>
     </div>
   )
 }

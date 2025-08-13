@@ -1,19 +1,20 @@
 import { DashboardCard } from '@/components/dashboard/dashboardCard'
-import { DashboardProgressBar } from '@/components/dashboard/dashboardProgressBar'
-import { DashboardTableUsersActivity } from '@/components/dashboard/dashboardTableUsersActivity'
 import { PageHeader } from '@/components/layout/pageHeader'
-import { ListTasks } from '@/components/tasks/listTasks'
-import { FiArrowUpRight, FiFolder } from 'react-icons/fi'
-import { GrFormNextLink } from 'react-icons/gr'
-import { IoMdTime } from 'react-icons/io'
+import { FaRegFolder } from 'react-icons/fa'
+import { FiArrowUpRight } from 'react-icons/fi'
+import { IoTimeOutline } from 'react-icons/io5'
+import { PiSignpost } from 'react-icons/pi'
+import { HiOutlineShieldCheck } from 'react-icons/hi2'
+import { DashboardProgressBar } from '@/components/dashboard/dashboardProgressBar'
 import { LuChartLine } from 'react-icons/lu'
-import { MdDone } from 'react-icons/md'
+import { DashboardTableUsersActivity } from '@/components/dashboard/dashboardTableUsersActivity'
+import { TaskListCard } from '@/components/tasks/taskListCard'
 
 const CARDS = [
   {
     header: {
       title: 'Tarefas em atraso',
-      icon: IoMdTime,
+      icon: IoTimeOutline,
       children: (
         <div className="flex justify-center bg-delay rounded-md items-center w-8 h-8">
           <FiArrowUpRight size={16} />
@@ -25,38 +26,38 @@ const CARDS = [
   {
     header: {
       title: 'Tarefas para hoje',
-      icon: FiFolder,
+      icon: FaRegFolder,
       children: (
         <div className="flex justify-center bg-today rounded-md items-center w-8 h-8">
           <FiArrowUpRight size={16} />
         </div>
       ),
     },
-    content: '12',
+    content: '5',
   },
   {
     header: {
       title: 'Próximas tarefas',
-      icon: GrFormNextLink,
+      icon: PiSignpost,
       children: (
         <div className="flex justify-center bg-next rounded-md items-center w-8 h-8">
           <FiArrowUpRight size={16} />
         </div>
       ),
     },
-    content: '25',
+    content: '5',
   },
   {
     header: {
-      title: 'Tarefas concluídas',
-      icon: MdDone,
+      title: 'Concluídos',
+      icon: HiOutlineShieldCheck,
       children: (
         <div className="flex justify-center bg-done rounded-md items-center w-8 h-8">
           <FiArrowUpRight size={16} />
         </div>
       ),
     },
-    content: '3',
+    content: '5',
   },
 ]
 
@@ -102,18 +103,18 @@ const USER_ACTIVITY_DATA = [
   },
 ]
 
-export default function DashboardPage() {
+export default function DashboardProjectPage() {
   return (
-    <div className="flex flex-col w-full gap-7">
-      <PageHeader pageTitle="Dashboard do curso" subTitle="Bom dia, Joaquim" />
-      <div className="grid w-full gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="flex flex-col gap-7">
+      <PageHeader pageTitle="Curso online abc" subTitle="Bom dia, Joaquim." />
+      <div className="flex gap-5">
         {CARDS.map((card, index) => (
           <DashboardCard className="flex-grow" key={index} header={card.header}>
             <p className="text-3xl p-7 font-semibold">{card.content}</p>
           </DashboardCard>
         ))}
       </div>
-      <div className="flex items-start gap-5 w-full">
+      <div className="flex gap-5">
         <DashboardProgressBar
           title="Progresso das tarefas"
           icon={LuChartLine}
@@ -121,9 +122,7 @@ export default function DashboardPage() {
         />
         <DashboardTableUsersActivity data={USER_ACTIVITY_DATA} />
       </div>
-      <div className='flex w-full'>
-        <ListTasks/>
-      </div>
+      <TaskListCard />
     </div>
   )
 }

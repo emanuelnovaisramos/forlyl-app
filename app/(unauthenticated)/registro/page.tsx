@@ -45,7 +45,7 @@ export default function SignInPage() {
   })
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center bg-background px-4 items-center min-h-screen">
       <div className="flex bg-white relative overflow-hidden rounded-md w-max">
         <div className="flex p-10 w-[525px] flex-col gap-10">
           <div className="flex flex-col gap-4">
@@ -139,10 +139,10 @@ export default function SignInPage() {
                   Ao clicar aqui, eu assumo que li e aceito os termos.
                 </p>
               </div>
-              <Button className="mt-6">Criar conta agora</Button>
+              <Button className="mt-6 font-bold">Criar conta agora</Button>
               <div className="flex gap-1 mt-10 text-center justify-center items-center">
                 <p>Já possui conta?</p>
-                <Link href="/" className="text-secondary opacity-80 underline">
+                <Link href="/" className="text-bg-secondary opacity-80 underline">
                   Faça Log in
                 </Link>
               </div>
@@ -153,9 +153,6 @@ export default function SignInPage() {
           className={`w-[450px] bg-cover min-h-full flex gap-1 justify-end text-2xl flex-col px-10 py-16 text-white bg-[url('/signIn-bg.png')]`}
         >
           <p className="font-bold">For</p>
-          <p>
-            <b>L</b>iving <b>Y</b>our <b>L</b>ife
-          </p>
           <p>
             <b>L</b>everaging <b>Y</b>our <b>L</b>auches
           </p>

@@ -1,12 +1,11 @@
 import type { Metadata } from 'next'
-import './globals.scss'
+import './globals.css'
 import { Sora } from 'next/font/google'
-import { Theme } from '@radix-ui/themes'
 
 const sora = Sora({
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800'],
-  subsets: ['latin'],
-  display: 'swap',
+  variable: "--font-primary",
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
 })
 
 export const metadata: Metadata = {
@@ -21,8 +20,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${sora.className} min-h-screen`}>
-        <Theme>{children}</Theme>
+      <body className={`${sora.variable} min-h-screen`}>
+        {children}
       </body>
     </html>
   )

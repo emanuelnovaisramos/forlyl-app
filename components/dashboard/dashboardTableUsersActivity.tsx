@@ -1,7 +1,7 @@
-import { Table } from '@radix-ui/themes'
+import Image from 'next/image'
+import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { RxCounterClockwiseClock } from 'react-icons/rx'
 import { DashboardCard } from './dashboardCard'
-import Image from 'next/image'
 
 type UserActivity = {
   avatar: string
@@ -20,28 +20,32 @@ export const DashboardTableUsersActivity = ({
         title: 'Atividade recente',
         icon: RxCounterClockwiseClock,
       }}
+      className='h-max'
     >
-      <Table.Root variant="surface" className="border-none">
-        <Table.Body>
-          {data.map((user, index) => (
-            <Table.Row align="center" key={index}>
-              <Table.RowHeaderCell className='font-normal'>
-                {user.activity}
-              </Table.RowHeaderCell>
-              <Table.Cell className='w-full justify-center flex h-full border-l-[1px] border-r-[1px]'>
-                <Image
-                  className="w-7 h-7 object-cover rounded-full"
-                  src={user.avatar}
-                  width={100}
-                  height={100}
-                  alt={''}
-                />
-              </Table.Cell>
-              <Table.Cell className='text-normal text-gray-600'>{user.time}</Table.Cell>
-            </Table.Row>
+      <Table>
+        <TableBody>
+          {data.map((item, index) => (
+            <TableRow key={index} >
+              <TableCell className='pl-7'>{item.activity}</TableCell>
+              <TableCell className='border-l border-r'>
+                <div className="flex justify-center items-center">
+                  <div className="relative h-8 w-8 overflow-hidden rounded-full">
+                    <Image
+                      src={item.avatar}
+                      alt={item.activity}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              </TableCell>
+              <TableCell className="w-[150px] text-center text-sm text-third">
+                {item.time}
+              </TableCell>
+            </TableRow>
           ))}
-        </Table.Body>
-      </Table.Root>
+        </TableBody>
+      </Table>
     </DashboardCard>
   )
 }

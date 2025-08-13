@@ -12,7 +12,7 @@ export const PageHeader = ({
   return (
     <div className="flex items-center w-full justify-between">
       <div className="flex flex-col">
-        <h2 className="text-3xl font-normal">{pageTitle}</h2>
+        <h2 className="text-[34px] font-normal">{pageTitle}</h2>
         {subTitle && <p className="font-normal">{subTitle}</p>}
       </div>
       {children}

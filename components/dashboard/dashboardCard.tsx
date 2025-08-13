@@ -15,8 +15,8 @@ export const DashboardCard = ({ className, header, children }: DashboardCardProp
     <div className={cn("w-full border rounded-md relative overflow-hidden", className)}>
       <div className="w-full px-7 py-5 font-normal text-white flex justify-between items-center bg-four">
         <div className="flex gap-3 items-center">
-          <header.icon size={23} />
-          <p className="text-lg">{header.title}</p>
+          <header.icon size={18} />
+          <p className="text-lg font-normal">{header.title}</p>
         </div>
         <div className="">{header?.children}</div>
       </div>
