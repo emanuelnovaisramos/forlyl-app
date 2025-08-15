@@ -12,6 +12,9 @@
   --color-primary: #181D27;
   --color-secondary: white;
   --color-third: #717680;
+  --color-four: #A4A7AE;
+
+  --color-border-primary: #D9D9D9;
   
   --bg-primary: #fafafa;
   --bg-secondary: #2C58E4;
@@ -19,6 +22,7 @@
   --bg-four: #1536B6;
   --bg-five: #DCE8FD;
   --bg-six: #F0F5FE;
+  --bg-seven: #E9EAEB;
 
   --bg-checkbox: #4486F4;
   
@@ -28,6 +32,11 @@
   --color-next: #FDB022;
   --color-done: #32D583;
   --color-done2: #2C58E4;
+
+  --color-kanban-todo: #FDB022;
+  --color-kanban-doing: #4486F4;
+  --color-kanban-done: #32D583;
+  --color-kanban-overdue: #F97066;
 
   --icon-primary: #C1D7FC;
   --icon-border: #659CF5;

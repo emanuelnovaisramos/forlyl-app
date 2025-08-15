@@ -27,7 +27,7 @@ export const DashboardTableUsersActivity = ({
           {data.map((item, index) => (
             <TableRow key={index} >
               <TableCell className='pl-7.5'>{item.activity}</TableCell>
-              <TableCell className='border-l border-r'>
+              <TableCell className='border-l border-r border-border-primary'>
                 <div className="flex justify-center items-center">
                   <div className="relative h-8 w-8 overflow-hidden rounded-full">
                     <Image

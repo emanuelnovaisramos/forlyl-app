@@ -133,7 +133,7 @@ export default function ProductsPage() {
             badgeCount={product.badgeCount}
           />
         ))}
-        <div className="border cursor-pointer w-[250px] flex justify-center items-center item min-h-full rounded-md">
+        <div className="border border-border-primary cursor-pointer w-[250px] flex justify-center items-center item min-h-full rounded-md">
           <FiPlus size={20} />
         </div>
       </div>

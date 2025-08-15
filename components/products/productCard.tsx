@@ -18,7 +18,7 @@ export const ProductCard = ({
   badgeCount,
 }: ProductCardProps) => {
   return (
-    <div className="flex w-[250px] bg-white border gap-0 relative overflow-hidden flex-col rounded-md">
+    <div className="flex w-[250px] bg-white border border-border-primary gap-0 relative overflow-hidden flex-col rounded-md">
       <div className="flex w-full relative">
         <Image
           src={imageUrl}
@@ -35,7 +35,8 @@ export const ProductCard = ({
         </div>
       </div>
       <ProgressBar
-        containerClassName="rounded-none h-1.5"
+        size="h-1.5"
+        containerClassName="rounded-none"
         progress={progress}
       />
       <div className="p-4">

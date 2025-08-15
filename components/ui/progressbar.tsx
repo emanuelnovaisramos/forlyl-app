@@ -4,25 +4,33 @@ import React from 'react'
 
 export interface ProgressBarProps extends React.HTMLAttributes<HTMLDivElement> {
   progress: number
+  size: string
   containerClassName?: string
 }
 
 const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
-  ({ progress, containerClassName, className, ...props }, ref) => {
+  ({ progress, containerClassName, className, size, ...props }, ref) => {
     return (
       <Progress.Root
         ref={ref}
-        className={cn('w-full border h-3 bg-gray-200 rounded-full relative overflow-hidden', containerClassName)}
+        className={cn(
+          'w-full border border-border-primary bg-[#D5D7DA] rounded-full relative overflow-hidden',
+          containerClassName,
+        )}
         value={progress}
       >
         <Progress.Indicator
-          className={cn('bg-today w-full h-full rounded-r-md', className)}
+          className={cn(
+            'bg-today rounded-r-md transition-all',
+            className,
+            size
+          )}
           style={{ transform: `translateX(-${100 - progress}%)` }}
           {...props}
         />
       </Progress.Root>
     )
-  }
+  },
 )
 
 ProgressBar.displayName = 'ProgressBar'
