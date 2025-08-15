@@ -105,12 +105,12 @@ const PRODUCTS = [
 
 export default function ProductsPage() {
   return (
-    <div className="flex flex-col w-full gap-7">
+    <div className="flex flex-col w-full gap-7.5">
       <PageHeader pageTitle="Meus projetos" />
       <div className="flex w-full gap-5">
         {CARDS.map((card, index) => (
           <DashboardCard className="flex-grow" key={index} header={card.header}>
-            <p className="text-3xl p-7 font-semibold">{card.content}</p>
+            <p className="text-3xl p-7.5 font-semibold">{card.content}</p>
           </DashboardCard>
         ))}
       </div>

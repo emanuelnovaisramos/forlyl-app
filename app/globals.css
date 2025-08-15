@@ -36,6 +36,7 @@
 body {
   overflow-x: hidden;
   color: var(--color-primary);
+  background-color: var(--bg-primary);
   font-family: var(--font-primary), sans-serif;
 }
 

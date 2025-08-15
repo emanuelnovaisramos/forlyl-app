@@ -9,7 +9,7 @@ export interface ButtonProps
 const buttonVariants = cva('', {
   variants: {
     variant: {
-      default: 'bg-bg-secondary text-sm w-full text-white p-4 rounded-md shadow',
+      default: 'bg-background-secondary text-sm w-full text-white p-4 rounded-md shadow',
     },
   },
   defaultVariants: {

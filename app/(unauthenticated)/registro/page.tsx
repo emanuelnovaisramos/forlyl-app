@@ -142,7 +142,7 @@ export default function SignInPage() {
               <Button className="mt-6 font-bold">Criar conta agora</Button>
               <div className="flex gap-1 mt-10 text-center justify-center items-center">
                 <p>Já possui conta?</p>
-                <Link href="/" className="text-bg-secondary opacity-80 underline">
+                <Link href="/" className="text-background-secondary opacity-80 underline">
                   Faça Log in
                 </Link>
               </div>

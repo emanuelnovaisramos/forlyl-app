@@ -20,7 +20,7 @@ export const Nav = ({ children }: { children: React.ReactNode }) => {
       <div className="relative flex flex-1 max-h-screen overflow-y-hidden">
         <nav
           className={twMerge(
-            'flex w-max justify-between flex-col bg-bg-third min-h-full transition duration-300 ease-in-out',
+            'flex w-max justify-between flex-col bg-background-third min-h-full transition duration-300 ease-in-out',
             isExpand ? 'w-64' : 'w-16',
           )}
         >
@@ -30,7 +30,7 @@ export const Nav = ({ children }: { children: React.ReactNode }) => {
                 <li
                   className={twMerge(
                     'flex w-full justify-between cursor-pointer rounded-l-md text-icon-primary hover:text-white',
-                    pathName.startsWith(item.basePath) ? 'text-white bg-four' : '',
+                    pathName.startsWith(item.basePath) ? 'text-white bg-background-four' : '',
                   )}
                 >
                   <div className="flex gap-4 h-11 items-center p-3">
@@ -53,13 +53,13 @@ export const Nav = ({ children }: { children: React.ReactNode }) => {
               </Link>
             ))}
           </ul>
-          <div className="flex cursor-pointer border-opacity-50 border-[var(--bg-four)] items-center py-4 border-t-[0.5px] pl-5 text-icon-primary hover:text-white">
+          <div className="flex cursor-pointer border-opacity-50 border-background-four items-center py-4 border-t-[0.5px] pl-5 text-icon-primary hover:text-white">
             <MdLogout size={20} className="mr-4" />
             {isExpand && <p>Sair</p>}
           </div>
         </nav>
         {subRoutes && (
-          <div className="flex flex-col gap-7 px-7 py-10 min-w-[270px] h-screen bg-bg-five">
+          <div className="flex flex-col gap-7.5 px-7.5 py-10 min-w-[270px] h-screen bg-background-five">
             {subRoutes.map((route, index) => (
               <Link
                 key={index}
@@ -71,7 +71,7 @@ export const Nav = ({ children }: { children: React.ReactNode }) => {
             ))}
           </div>
         )}
-        <div className="flex-1 w-full bg-background overflow-y-auto max-h-screen p-7">
+        <div className="flex-1 w-full bg-background overflow-y-auto max-h-screen p-7.5">
           {children}
         </div>
       </div>

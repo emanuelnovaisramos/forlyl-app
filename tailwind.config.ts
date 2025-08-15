@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
     extend: {
+      spacing: {
+        '7.5': '30px',
+      },
       colors: {
         background: 'var(--bg-primary)',
         foreground: 'hsl(var(--foreground))',
@@ -22,12 +25,12 @@ export default {
         },
         third: 'var(--color-third)',
         tertiary: 'var(--color-tertiary)',
-        'bg-third': 'var(--bg-third)',
-        four: 'var(--bg-four)',
-        'bg-five': 'var(--bg-five)',
+        'background-secondary': 'var(--bg-secondary)',
+        'background-third': 'var(--bg-third)',
+        'background-four': 'var(--bg-four)',
+        'background-five': 'var(--bg-five)',
+        'background-six': 'var(--bg-six)',
         header: 'var(--header)',
-        'bg-secondary': 'var(--bg-secondary)',
-        'bg-six': 'var(--bg-six)',
         checkbox: 'var(--bg-checkbox)',
         'icon-primary': 'var(--icon-primary)',
         'icon-border': 'var(--icon-border)',

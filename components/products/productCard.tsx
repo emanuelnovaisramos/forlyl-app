@@ -27,7 +27,7 @@ export const ProductCard = ({
           alt={title}
           className="w-full h-50 object-cover"
         />
-        <div className="absolute text-white m-2 text-center rounded-full bg-four w-6 h-6 left-0">
+        <div className="absolute text-white m-2 text-center rounded-full bg-background-four w-6 h-6 left-0">
           {badgeCount}
         </div>
         <div className="p-1 right-0 m-2 absolute rounded-md bg-white bg-opacity-50">

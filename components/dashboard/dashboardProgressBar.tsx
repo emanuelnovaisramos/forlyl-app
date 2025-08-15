@@ -24,7 +24,7 @@ export const DashboardProgressBar: React.FC<DashboardProgressBarProps> = ({
         icon: icon,
       }}
     >
-      <div className="w-full flex flex-col gap-6 p-7">
+      <div className="w-full flex flex-col gap-6 p-7.5">
         {itens.map((item: Item, index) => (
           <div key={index} className="flex w-full items-center gap-5">
             <p className="min-w-56 text-sm">{item.label}</p>

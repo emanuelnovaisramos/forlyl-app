@@ -80,34 +80,34 @@ export const TaskListCard = () => {
       }}
     >
       <Table>
-        <TableHeader className="bg-bg-six px-7">
+        <TableHeader className="bg-background-six px-7.5">
           <TableRow className="text-base">
-            <TableHead className="px-7 border-r text-primary">Tarefa</TableHead>
-            <TableHead className="px-7 border-r text-primary">
+            <TableHead className="px-7.5 border-r text-primary">Tarefa</TableHead>
+            <TableHead className="px-7.5 border-r text-primary">
               Subtarefa atual
             </TableHead>
-            <TableHead className="px-7 border-r text-primary">
+            <TableHead className="px-7.5 border-r text-primary">
               Responsável
             </TableHead>
-            <TableHead className="px-7 border-r w-[300px] text-primary">
+            <TableHead className="px-7.5 border-r w-[300px] text-primary">
               Data limite
             </TableHead>
-            <TableHead className="px-7 border-r text-primary">
+            <TableHead className="px-7.5 border-r text-primary">
               Situação
             </TableHead>
-            <TableHead className="px-7 w-[37px]"></TableHead>
+            <TableHead className="px-7.5 w-[37px]"></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody className='bg-white'>
           {tasks.map((item, index) => (
             <TableRow key={index}>
-              <TableCell className="border-r px-7 min-w-[250px]">
+              <TableCell className="border-r px-7.5 min-w-[250px]">
                 {item.activity}
               </TableCell>
-              <TableCell className="border-r px-7 min-w-[250px]">
+              <TableCell className="border-r px-7.5 min-w-[250px]">
                 {item.subtask}
               </TableCell>
-              <TableCell className="border-r min-w-[250px] px-7">
+              <TableCell className="border-r min-w-[250px] px-7.5">
                 <div className="flex items-center gap-2">
                   <div className="relative h-6 w-6 overflow-hidden rounded-full">
                     <Image
@@ -121,10 +121,10 @@ export const TaskListCard = () => {
                   <span>{item.name}</span>
                 </div>
               </TableCell>
-              <TableCell className="px-7 min-w-[250px] border-r">
+              <TableCell className="px-7.5 min-w-[250px] border-r">
                 {item.time}
               </TableCell>
-              <TableCell className="border-r min-w-[200px] px-7">
+              <TableCell className="border-r min-w-[200px] px-7.5">
                 <div
                   className={`py-1 px-2 items-center gap-1 flex rounded-md w-max text-white text-xs ${item.status.color}`}
                 >
