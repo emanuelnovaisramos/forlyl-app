@@ -11,9 +11,6 @@ export const Nav = ({ children }: { children: React.ReactNode }) => {
   const [isExpand, setIsExpand] = useState(false)
   const pathName = usePathname()
 
-  const subRoutes =
-    navItens.find(item => pathName.startsWith(item.basePath))?.subRoutes || null
-
   return (
     <div className="flex h-screen flex-col">
       <Header onClickMenu={() => setIsExpand(prev => !prev)} />
@@ -58,20 +55,7 @@ export const Nav = ({ children }: { children: React.ReactNode }) => {
             {isExpand && <p>Sair</p>}
           </div>
         </nav>
-        {subRoutes && (
-          <div className="flex flex-col gap-7.5 px-7.5 py-10 min-w-[270px] h-screen bg-background-five">
-            {subRoutes.map((route, index) => (
-              <Link
-                key={index}
-                href={route.href}
-                className={`${route.href === pathName ? 'font-bold' : ''} flex items-center gap-2`}
-              >
-                {route.name}
-              </Link>
-            ))}
-          </div>
-        )}
-        <div className="flex-1 w-full bg-background overflow-y-auto max-h-screen p-7.5">
+        <div className="flex-1 w-full bg-background overflow-y-auto max-h-screen">
           {children}
         </div>
       </div>

@@ -10,7 +10,7 @@ const kanbanColumns = [
 
 export const Kanban = () => {
   return (
-    <div className="flex items-start gap-5">
+    <div className="grid grid-cols-4 items-start gap-5 max-[1500px]:grid-cols-2">
       {kanbanColumns.map(column => (
         <KanbanColumn
           key={column.value}

@@ -1,7 +1,7 @@
 import { FaRegFile } from 'react-icons/fa'
 import { IoTimeOutline } from 'react-icons/io5'
 import Image from 'next/image'
-import { ProgressBar } from '../ui/progressbar'
+import { ProgressBar } from '@/components/ui/progressbar'
 
 export const KanbanItemCard = ({ value }: { value: string }) => {
   return (

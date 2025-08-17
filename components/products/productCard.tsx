@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { ProgressBar } from '../ui/progressbar'
 import { FiPlus } from 'react-icons/fi'
+import Link from 'next/link'
 
 interface ProductCardProps {
   imageUrl: string
@@ -18,7 +19,7 @@ export const ProductCard = ({
   badgeCount,
 }: ProductCardProps) => {
   return (
-    <div className="flex w-[250px] bg-white border border-border-primary gap-0 relative overflow-hidden flex-col rounded-md">
+    <Link href={`/projetos/${1}/painel`} className="flex w-[250px] bg-white border border-border-primary gap-0 relative overflow-hidden flex-col rounded-md">
       <div className="flex w-full relative">
         <Image
           src={imageUrl}
@@ -43,6 +44,6 @@ export const ProductCard = ({
         <p className="font-bold">{title}</p>
         <p className="text-sm">{description}</p>
       </div>
-    </div>
+    </Link>
   )
 }

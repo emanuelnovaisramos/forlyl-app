@@ -105,7 +105,7 @@ const USER_ACTIVITY_DATA = [
 
 export default function DashboardProjectPage() {
   return (
-    <div className="flex flex-col gap-7.5">
+    <div className="flex flex-col gap-7.5 p-7.5">
       <PageHeader pageTitle="Curso online abc" subTitle="Bom dia, Joaquim." />
       <div className="flex gap-5">
         {CARDS.map((card, index) => (

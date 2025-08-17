@@ -1,0 +1,38 @@
+.gantt {
+    .gantt_scale_cell {
+        font-size: 12px;
+        color: var(--color-primary);
+    }
+
+    .gantt_task_line {
+        border-radius: 8px;
+        background-color: white !important;
+        border: 1px solid var(--color-border-primary) !important;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            background-color: var(--color-next);
+        }
+
+        .gantt_task_progress {
+            background-color: #2563eb !important;
+            border-radius: 8px;
+        }
+
+        .gantt_task_content {
+            color: var(--color-primary);
+            font-weight: 500;
+            font-size: 12px;
+            overflow: visible;
+            white-space: nowrap;
+            margin-left: 10px;
+        }
+    }
+}

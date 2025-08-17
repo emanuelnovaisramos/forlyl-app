@@ -4,8 +4,9 @@ import { DashboardTableUsersActivity } from '@/components/dashboard/dashboardTab
 import { PageHeader } from '@/components/layout/pageHeader'
 import { FiArrowUpRight } from 'react-icons/fi'
 import { LuChartLine } from 'react-icons/lu'
-import { FaRegFolder } from "react-icons/fa";
-import { HiOutlineShieldCheck } from "react-icons/hi2";
+import { FaRegFolder } from 'react-icons/fa'
+import { HiOutlineShieldCheck } from 'react-icons/hi2'
+import { ProductCard } from '@/components/products/productCard'
 
 const CARDS = [
   {
@@ -20,7 +21,7 @@ const CARDS = [
     },
     content: '5',
   },
-    {
+  {
     header: {
       title: 'Concluídos',
       icon: HiOutlineShieldCheck,
@@ -76,9 +77,36 @@ const USER_ACTIVITY_DATA = [
   },
 ]
 
+const PRODUCTS = [
+  {
+    imageUrl:
+      'https://www.moskitcrm.com/hubfs/60_X%20cursos%20de%20vendas%20gratuitos.png',
+    title: 'Curso online abc',
+    progress: 0,
+    description: 'Página de obrigado',
+    badgeCount: 3,
+  },
+  {
+    imageUrl:
+      'https://www.moskitcrm.com/hubfs/60_X%20cursos%20de%20vendas%20gratuitos.png',
+    title: 'Curso online xyz',
+    progress: 70,
+    description: 'Página inicial',
+    badgeCount: 5,
+  },
+  {
+    imageUrl:
+      'https://www.moskitcrm.com/hubfs/60_X%20cursos%20de%20vendas%20gratuitos.png',
+    title: 'Curso online cde',
+    progress: 30,
+    description: 'Página de captura',
+    badgeCount: 2,
+  },
+]
+
 export default function DashboardPage() {
   return (
-    <div className="flex flex-col w-full gap-7.5">
+    <div className="flex flex-col w-full gap-7.5 p-7.5">
       <PageHeader pageTitle="Dashboard" />
       <div className="w-full flex gap-5">
         {CARDS.map((card, index) => (
@@ -94,6 +122,21 @@ export default function DashboardPage() {
           itens={PROGRESS_ITEMS}
         />
         <DashboardTableUsersActivity data={USER_ACTIVITY_DATA} />
+      </div>
+      <div className="flex flex-col gap-5">
+        <h2 className="text-xl">Projetos ativos</h2>
+        <div className="flex gap-5">
+          {PRODUCTS.map((product, index) => (
+            <ProductCard
+              key={index}
+              imageUrl={product.imageUrl}
+              title={product.title}
+              progress={product.progress}
+              description={product.description}
+              badgeCount={product.badgeCount}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )
