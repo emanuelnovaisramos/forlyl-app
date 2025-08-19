@@ -1,4 +1,14 @@
 .gantt {
+    font-family: var(--font-primary) !important;
+
+    .gantt_scale_cell,
+    .gantt_task_content,
+    .gantt_row,
+    .gantt_grid_head_cell,
+    .gantt_grid_data .gantt_cell {
+        font-family: var(--font-primary) !important;
+    }
+
     .gantt_scale_cell {
         font-size: 12px;
         color: var(--color-primary);
@@ -28,7 +38,7 @@
 
         .gantt_task_content {
             color: var(--color-primary);
-            font-weight: 500;
+            font-weight: 600 !important;
             font-size: 12px;
             overflow: visible;
             white-space: nowrap;
