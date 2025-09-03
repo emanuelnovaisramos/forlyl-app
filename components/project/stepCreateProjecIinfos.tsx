@@ -16,7 +16,7 @@ import {
   SelectValue,
 } from '../ui/select'
 
-const productSchema = z.object({
+const projectSchema = z.object({
   name: z
     .string()
     .min(1, { message: 'O nome do produto é obrigatório' })
@@ -30,15 +30,15 @@ const productSchema = z.object({
     .max(1000, { message: 'A descrição deve ter no máximo 1000 caracteres' }),
 })
 
-export type ProductInfos = z.infer<typeof productSchema>
+export type ProjectInfos = z.infer<typeof projectSchema>
 
-export const StepCreateProductInfos = ({
+export const StepCreateProjectInfos = ({
   handleSubmit,
 }: {
-  handleSubmit: (data: ProductInfos) => void
+  handleSubmit: (data: ProjectInfos) => void
 }) => {
-  const form = useForm<ProductInfos>({
-    resolver: zodResolver(productSchema),
+  const form = useForm<ProjectInfos>({
+    resolver: zodResolver(projectSchema),
     defaultValues: {
       name: '',
       niche: '',
@@ -46,7 +46,7 @@ export const StepCreateProductInfos = ({
     },
   })
 
-  const onSubmit = (data: ProductInfos) => {
+  const onSubmit = (data: ProjectInfos) => {
     handleSubmit(data)
   }
 

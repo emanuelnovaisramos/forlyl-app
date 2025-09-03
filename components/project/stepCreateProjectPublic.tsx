@@ -9,7 +9,7 @@ import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { InputMoney } from '../ui/inputMoney'
 
-const productSchema = z
+const projectSchema = z
   .object({
     audienceAgeFrom: z
       .number({
@@ -47,17 +47,17 @@ const productSchema = z
     },
   )
 
-export type ProductInfosPublic = z.infer<typeof productSchema>
+export type ProjectInfosPublic = z.infer<typeof projectSchema>
 
-export const StepCreateProductPublic = ({
+export const StepCreateProjectPublic = ({
   handleSubmit,
   isPending,
 }: {
-  handleSubmit: (data: ProductInfosPublic) => void
+  handleSubmit: (data: ProjectInfosPublic) => void
   isPending?: boolean
 }) => {
-  const form = useForm<ProductInfosPublic>({
-    resolver: zodResolver(productSchema),
+  const form = useForm<ProjectInfosPublic>({
+    resolver: zodResolver(projectSchema),
     defaultValues: {
       audienceAgeFrom: undefined,
       audienceAgeTo: undefined,
@@ -66,7 +66,7 @@ export const StepCreateProductPublic = ({
     },
   })
 
-  const onSubmit = (data: ProductInfosPublic) => {
+  const onSubmit = (data: ProjectInfosPublic) => {
     handleSubmit(data)
   }
 

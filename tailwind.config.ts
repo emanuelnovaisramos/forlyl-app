@@ -34,6 +34,7 @@ export default {
         'background-five': 'var(--bg-five)',
         'background-six': 'var(--bg-six)',
         'background-seven': 'var(--bg-seven)',
+        'background-eight': 'var(--bg-eight)',
         'border-primary': 'var(--color-border-primary)',
         kanban: {
           todo: 'var(--color-kanban-todo)',

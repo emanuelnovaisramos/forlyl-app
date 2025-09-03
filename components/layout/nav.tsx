@@ -9,13 +9,12 @@ import Link from 'next/link'
 import { useAuth } from '@/contexts/authContext'
 
 export const Nav = ({ children }: { children: React.ReactNode }) => {
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const [isExpand, setIsExpand] = useState(false)
   const pathName = usePathname()
 
   return (
     <div className="flex h-screen flex-col">
-      {user?.email}
       <Header onClickMenu={() => setIsExpand(prev => !prev)} />
       <div className="relative flex flex-1 max-h-screen overflow-y-hidden">
         <nav

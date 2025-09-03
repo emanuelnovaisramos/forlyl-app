@@ -22,14 +22,33 @@ import {
   FormControl,
   FormMessage,
 } from '@/components/ui/form'
-import { CreateProjectPhase } from '@/api/product/createProduct'
+import { CreateProjectPhase } from '@/api/project/createProject'
 
-const phaseSchema = z.object({
-  name: z.string().min(1, 'O nome é obrigatório'),
-  color: z.string().min(1, 'A cor é obrigatória'),
-  startDate: z.string().min(1, 'Data inicial é obrigatória'),
-  endDate: z.string().min(1, 'Data final é obrigatória'),
-})
+const phaseSchema = z
+  .object({
+    name: z.string().min(1, 'O nome é obrigatório'),
+    color: z.string().min(1, 'A cor é obrigatória'),
+    startDate: z.string().min(1, 'Data inicial é obrigatória'),
+    endDate: z.string().min(1, 'Data final é obrigatória'),
+  })
+  .refine(
+    data => new Date(data.startDate) > new Date(new Date().toDateString()),
+    {
+      message: 'A data inicial não pode ser no passado',
+      path: ['startDate'],
+    },
+  )
+  .refine(
+    data => new Date(data.endDate) > new Date(new Date().toDateString()),
+    {
+      message: 'A data final não pode ser no passado',
+      path: ['endDate'],
+    },
+  )
+  .refine(data => new Date(data.startDate) <= new Date(data.endDate), {
+    message: 'A data inicial não pode ser maior que a data final',
+    path: ['startDate', 'endDate'],
+  })
 
 type PhaseFormValues = z.infer<typeof phaseSchema>
 
@@ -138,7 +157,7 @@ export function ModalCreatePhases({
                         <Input
                           type="color"
                           {...field}
-                          className="w-10 h-10 p-0 border-none"
+                          className="w-10 h-10 cursor-pointer p-0 border-none"
                         />
                         <span className="text-sm">{watch('color')}</span>
                       </div>

@@ -9,7 +9,7 @@ import { Button } from '../ui/button'
 import { ModalCreatePhases } from './modalCreatePhases'
 import { MdEdit } from 'react-icons/md'
 import { IoClose } from 'react-icons/io5'
-import { CreateProjectPhase } from '@/api/product/createProduct'
+import { CreateProjectPhase } from '@/api/project/createProject'
 import { HiOutlinePlusSm } from 'react-icons/hi'
 
 export const StepCreateProductPhases = ({
@@ -137,7 +137,7 @@ export const StepCreateProductPhases = ({
           }
         />
         <div className="flex flex-col gap-10 w-full">
-          <div className="flex flex-col gap-2 justify-start items-start">
+          <div className="flex flex-col text-left gap-2 justify-start items-start">
             <p className="text-five text-3xl">{formatPhaseRange(phases)}</p>
             {!editable && (
               <p>Data sugerida com base nas informações anteriores</p>

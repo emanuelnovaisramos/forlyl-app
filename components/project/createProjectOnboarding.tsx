@@ -1,45 +1,42 @@
 'use client'
 import { useState } from 'react'
-import { StepCreateProductWelcome } from './stepCreateProductWelcome'
-import { ProductInfos, StepCreateProductInfos } from './stepCreateProductInfos'
-import {
-  ProductInfosPublic,
-  StepCreateProductPublic,
-} from './stepCreateProductPublic'
-import { StepCreateProductPhases } from './stepCreateProductPhases'
-import {
-  CreateProductParams,
-  CreateProjectPhase,
-  useCreateProduct,
-} from '@/api/product/createProduct'
 import { useToast } from '@/domains/toasterProvider'
 import { useRouter } from 'next/navigation'
 import { HOME_ROUTE } from '@/constants/mainRoutes'
+import { StepCreateProductWelcome } from './stepCreateProjectWelcome'
+import { StepCreateProductPhases } from './stepCreateProjectPhases'
+import {
+  ProjectInfosPublic,
+  StepCreateProjectPublic,
+} from './stepCreateProjectPublic'
+import { ProjectInfos, StepCreateProjectInfos } from './stepCreateProjecIinfos'
+import { CreateProjectParams, CreateProjectPhase, useCreateProject } from '@/api/project/createProject'
 
-export const CreateProductOnboarding = ({
+export const CreateProjectOnboarding = ({
   isFirst = false,
 }: {
   isFirst?: boolean
 }) => {
-  const { mutateAsync: createProduct, isPending: isPendingCreate } =
-    useCreateProduct()
+  const { mutateAsync: createProject, isPending: isPendingCreate } =
+    useCreateProject()
   const { showToast } = useToast()
-  const [productInfos, setProductInfos] = useState<ProductInfos>()
+  const [productInfos, setProductInfos] = useState<ProjectInfos>()
   const [productInfosPublic, setProductInfosPublic] =
-    useState<ProductInfosPublic>()
+    useState<ProjectInfosPublic>()
   const [currentStep, setCurrentStep] = useState(isFirst ? 1 : 2)
   const route = useRouter()
+  const [isRedirect, setIsRedirect] = useState(false)
 
   const handleNext = () => setCurrentStep(prev => prev + 1)
 
   const handleSubmit = async ({
-    createProductParams,
+    createProjectParams,
   }: {
-    createProductParams: CreateProductParams
+    createProjectParams: CreateProjectParams
   }) => {
     if (!productInfos || !productInfosPublic) return
 
-    await createProduct(createProductParams)
+    await createProject(createProjectParams)
       .then(() => {
         showToast({
           message: 'Produto criado com sucesso!',
@@ -47,6 +44,7 @@ export const CreateProductOnboarding = ({
         })
         if (isFirst) {
           route.push(HOME_ROUTE)
+          setIsRedirect(true)
         }
       })
       .catch(error => {
@@ -62,7 +60,7 @@ export const CreateProductOnboarding = ({
   const steps: Partial<Record<number, JSX.Element>> = {
     ...(isFirst ? { 1: <StepCreateProductWelcome onNext={handleNext} /> } : {}),
     2: (
-      <StepCreateProductInfos
+      <StepCreateProjectInfos
         handleSubmit={data => {
           setProductInfos(data)
           handleNext()
@@ -70,12 +68,12 @@ export const CreateProductOnboarding = ({
       />
     ),
     3: (
-      <StepCreateProductPublic
+      <StepCreateProjectPublic
         handleSubmit={data => {
           setProductInfosPublic(data)
           handleNext()
         }}
-        isPending={isPendingCreate}
+        isPending={isPendingCreate || isRedirect}
       />
     ),
     4: (
@@ -83,7 +81,7 @@ export const CreateProductOnboarding = ({
         handleSubmit={(data: CreateProjectPhase[]) => {
           if (productInfos?.name && productInfosPublic) {
             handleSubmit({
-              createProductParams: {
+              createProjectParams: {
                 ...productInfos,
                 ...productInfosPublic,
                 name: productInfos.name,

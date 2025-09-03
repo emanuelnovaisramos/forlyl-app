@@ -14,7 +14,7 @@ const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
       <Progress.Root
         ref={ref}
         className={cn(
-          'w-full border border-border-primary bg-[#D5D7DA] rounded-full relative overflow-hidden',
+          'w-full bg-[#D5D7DA] rounded-full relative overflow-hidden',
           containerClassName,
         )}
         value={progress}

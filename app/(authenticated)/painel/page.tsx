@@ -6,7 +6,6 @@ import { FiArrowUpRight } from 'react-icons/fi'
 import { LuChartLine } from 'react-icons/lu'
 import { FaRegFolder } from 'react-icons/fa'
 import { HiOutlineShieldCheck } from 'react-icons/hi2'
-import { ProductCard } from '@/components/products/productCard'
 
 const CARDS = [
   {
@@ -77,32 +76,18 @@ const USER_ACTIVITY_DATA = [
   },
 ]
 
-const PRODUCTS = [
-  {
-    imageUrl:
-      'https://www.moskitcrm.com/hubfs/60_X%20cursos%20de%20vendas%20gratuitos.png',
-    title: 'Curso online abc',
-    progress: 0,
-    description: 'Página de obrigado',
-    badgeCount: 3,
-  },
-  {
-    imageUrl:
-      'https://www.moskitcrm.com/hubfs/60_X%20cursos%20de%20vendas%20gratuitos.png',
-    title: 'Curso online xyz',
-    progress: 70,
-    description: 'Página inicial',
-    badgeCount: 5,
-  },
-  {
-    imageUrl:
-      'https://www.moskitcrm.com/hubfs/60_X%20cursos%20de%20vendas%20gratuitos.png',
-    title: 'Curso online cde',
-    progress: 30,
-    description: 'Página de captura',
-    badgeCount: 2,
-  },
-]
+/*
+  {PRODUCTS.map((product, index) => (
+            <ProductCard
+              key={index}
+              imageUrl={product.imageUrl}
+              title={product.title}
+              progress={product.progress}
+              description={product.description}
+              badgeCount={product.badgeCount}
+            />
+          ))}
+*/
 
 export default function DashboardPage() {
   return (
@@ -125,18 +110,7 @@ export default function DashboardPage() {
       </div>
       <div className="flex flex-col gap-5">
         <h2 className="text-xl">Projetos ativos</h2>
-        <div className="flex gap-5">
-          {PRODUCTS.map((product, index) => (
-            <ProductCard
-              key={index}
-              imageUrl={product.imageUrl}
-              title={product.title}
-              progress={product.progress}
-              description={product.description}
-              badgeCount={product.badgeCount}
-            />
-          ))}
-        </div>
+        <div className="flex gap-5"></div>
       </div>
     </div>
   )

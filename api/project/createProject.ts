@@ -10,7 +10,7 @@ export interface CreateProjectPhase {
   endDate: string
 }
 
-export type CreateProductParams = {
+export type CreateProjectParams = {
   name: string
   description: string
   niche: string
@@ -21,7 +21,7 @@ export type CreateProductParams = {
   phases?: CreateProjectPhase[]
 }
 
-const fetchCreateProduct = async (params: CreateProductParams) => {
+const fetchCreateProject = async (params: CreateProjectParams) => {
   const { [TOKEN_PATH]: TOKEN } = parseCookies()
   const res = await fetch(`${API_URL}/project`, {
     method: 'POST',
@@ -41,8 +41,8 @@ const fetchCreateProduct = async (params: CreateProductParams) => {
   return data
 }
 
-export const useCreateProduct = () => {
+export const useCreateProject = () => {
   return useMutation({
-    mutationFn: (params: CreateProductParams) => fetchCreateProduct(params),
+    mutationFn: (params: CreateProjectParams) => fetchCreateProject(params),
   })
 }

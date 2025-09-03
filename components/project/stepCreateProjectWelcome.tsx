@@ -1,12 +1,12 @@
 import { Button } from '../ui/button'
 
-interface StepCreateProductWelcomeProps {
+interface StepCreateProjectWelcomeProps {
   onNext: () => void
 }
 
 export const StepCreateProductWelcome = ({
   onNext,
-}: StepCreateProductWelcomeProps) => {
+}: StepCreateProjectWelcomeProps) => {
   return (
     <>
       <h1 className="text-2xl">Bem-vindo à Forlyl!</h1>
