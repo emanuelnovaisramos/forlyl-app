@@ -13,6 +13,8 @@
   --color-secondary: white;
   --color-third: #717680;
   --color-four: #A4A7AE;
+  --color-five: #1536B6;
+  --color-six: #2C58E4;
 
   --color-border-primary: #D9D9D9;
   
@@ -47,6 +49,11 @@ body {
   color: var(--color-primary);
   background-color: var(--bg-primary);
   font-family: var(--font-primary), sans-serif;
+  .date-range-no-click{
+    .rdrMonth{
+      pointer-events: none;
+    }
+  }
 }
 
 

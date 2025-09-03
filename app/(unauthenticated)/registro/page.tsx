@@ -13,36 +13,73 @@ import { useForm } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Button } from '@/components/ui/button'
-import { FaRegEye } from 'react-icons/fa'
-import { FaRegEyeSlash } from 'react-icons/fa'
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { useState } from 'react'
 import Link from 'next/link'
+import { useCreateUser } from '@/api/user/registerUser'
+import { useToast } from '@/domains/toasterProvider'
+import { useAuth } from '@/contexts/authContext'
+import { TOKEN_PATH, TOKENS_VALID_DAYS } from '@/constants/tokens'
+import { setCookie } from 'nookies'
+import { useRouter } from 'next/navigation'
+import { WELCOME_ROUTE } from '@/constants/mainRoutes'
 
 export default function SignInPage() {
+  const router = useRouter()
+  const { login } = useAuth()
+  const { showToast } = useToast()
+  const { mutateAsync: createUser } = useCreateUser()
   const [showPassword, setShowPassword] = useState(false)
+
   const formSchema = z.object({
     name: z.string().min(1, { message: 'Nome é obrigatório' }),
-    email: z.string().email({message: 'Email inválido'}).min(1, { message: 'Email é obrigatório' }),
+    email: z
+      .string()
+      .email({ message: 'Email inválido' })
+      .min(1, { message: 'Email é obrigatório' }),
     password: z
       .string()
-      .min(5, { message: 'A senha deve ter no mínimo 5 caracteres' })
+      .min(6, { message: 'A senha deve ter no mínimo 6 caracteres' })
       .max(30, { message: 'A senha deve ter no máximo 30 caracteres' }),
+    terms: z.boolean().refine(val => val === true, {
+      message: 'Você deve aceitar os termos',
+    }),
   })
-
-  const defaultValues = {
-    name: '',
-    email: '',
-    password: '',
-  }
-
-  const handleSignIn = async (userData: z.infer<typeof formSchema>) => {
-    console.log(userData)
-  }
 
   const formSettings = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues,
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+      terms: false,
+    },
   })
+
+  const handleSignIn = async (userData: z.infer<typeof formSchema>) => {
+    await createUser({
+      name: userData.name,
+      email: userData.email,
+      password: userData.password,
+    })
+      .then(res => {
+        router.push(WELCOME_ROUTE)
+        login(res.user)
+        setCookie(undefined, TOKEN_PATH, res.token, {
+          maxAge: TOKENS_VALID_DAYS * 24 * 60 * 60,
+          path: '/',
+        })
+        showToast({ message: 'Usuário criado com sucesso!', type: 'success' })
+      })
+      .catch(error => {
+        showToast({
+          message: error.message
+            ? error.message
+            : 'Ocorreu um erro ao criar o usuário',
+          type: 'error',
+        })
+      })
+  }
 
   return (
     <div className="flex justify-center bg-background px-4 items-center min-h-screen">
@@ -133,25 +170,46 @@ export default function SignInPage() {
                   </FormItem>
                 )}
               />
-              <div className="flex gap-2 items-start mt-6">
-                <Checkbox className="mt-0.5" />
-                <p className="leading-5 mr-2">
-                  Ao clicar aqui, eu assumo que li e aceito os termos.
+              <FormField
+                control={formSettings.control}
+                name="terms"
+                render={({ field }) => (
+                  <div className="flex gap-2 items-start mt-6">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={checked =>
+                          field.onChange(checked === true)
+                        }
+                        onBlur={field.onBlur}
+                        className="mt-0.5"
+                      />
+                    </FormControl>
+                    <p className="leading-5 mr-2">
+                      Ao clicar aqui, eu assumo que li e aceito os termos.
+                    </p>
+                  </div>
+                )}
+              />
+              {formSettings.formState.errors.terms && (
+                <p className="text-sm text-red-500">
+                  {formSettings.formState.errors.terms.message}
                 </p>
-              </div>
+              )}
               <Button className="mt-6 font-bold">Criar conta agora</Button>
               <div className="flex gap-1 mt-10 text-center justify-center items-center">
                 <p>Já possui conta?</p>
-                <Link href="/" className="text-background-secondary opacity-80 underline">
+                <Link
+                  href="/"
+                  className="text-background-secondary opacity-80 underline"
+                >
                   Faça Log in
                 </Link>
               </div>
             </form>
           </Form>
         </div>
-        <div
-          className={`w-[450px] bg-cover min-h-full flex gap-1 justify-end text-2xl flex-col px-10 py-16 text-white bg-[url('/signIn-bg.png')]`}
-        >
+        <div className="w-[450px] bg-cover min-h-full flex gap-1 justify-end text-2xl flex-col px-10 py-16 text-white bg-[url('/signIn-bg.png')]">
           <p className="font-bold">For</p>
           <p>
             <b>L</b>everaging <b>Y</b>our <b>L</b>auches

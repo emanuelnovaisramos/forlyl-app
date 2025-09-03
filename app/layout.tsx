@@ -1,11 +1,14 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { Sora } from 'next/font/google'
+import QueryProvider from '@/domains/queryProvider'
+import { ToastProvider } from '@/domains/toasterProvider'
+import { AuthProvider } from '@/contexts/authContext'
 
 const sora = Sora({
-  variable: "--font-primary",
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
+  variable: '--font-primary',
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800'],
 })
 
 export const metadata: Metadata = {
@@ -21,7 +24,11 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${sora.variable} min-h-screen`}>
-        {children}
+        <QueryProvider>
+          <ToastProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </ToastProvider>
+        </QueryProvider>
       </body>
     </html>
   )

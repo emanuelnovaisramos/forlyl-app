@@ -1,3 +1,6 @@
+'use client'
+
+import { usePathname } from 'next/navigation'
 import { Nav } from '@/components/layout/nav'
 
 export default function Layout({
@@ -5,5 +8,15 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <Nav>{children}</Nav>
+  const pathname = usePathname()
+
+  const withoutNavRoutes = ['/boas-vindas']
+
+  const Content = withoutNavRoutes.includes(pathname) ? (
+    children
+  ) : (
+    <Nav>{children}</Nav>
+  )
+
+  return Content
 }

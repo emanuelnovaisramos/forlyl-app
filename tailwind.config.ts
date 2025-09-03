@@ -26,6 +26,8 @@ export default {
         third: 'var(--color-third)',
         tertiary: 'var(--color-tertiary)',
         four: 'var(--color-four)',
+        five: 'var(--color-five)',
+        six: 'var(--color-six)',
         'background-secondary': 'var(--bg-secondary)',
         'background-third': 'var(--bg-third)',
         'background-four': 'var(--bg-four)',

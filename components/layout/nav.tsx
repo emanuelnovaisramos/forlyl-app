@@ -6,13 +6,16 @@ import { twMerge } from 'tailwind-merge'
 import { Header } from './header'
 import { MdLogout } from 'react-icons/md'
 import Link from 'next/link'
+import { useAuth } from '@/contexts/authContext'
 
 export const Nav = ({ children }: { children: React.ReactNode }) => {
+  const { user, logout } = useAuth();
   const [isExpand, setIsExpand] = useState(false)
   const pathName = usePathname()
 
   return (
     <div className="flex h-screen flex-col">
+      {user?.email}
       <Header onClickMenu={() => setIsExpand(prev => !prev)} />
       <div className="relative flex flex-1 max-h-screen overflow-y-hidden">
         <nav
@@ -50,7 +53,7 @@ export const Nav = ({ children }: { children: React.ReactNode }) => {
               </Link>
             ))}
           </ul>
-          <div className="flex cursor-pointer border-opacity-50 border-background-four items-center py-4 border-t-[0.5px] pl-5 text-icon-primary hover:text-white">
+          <div className="flex cursor-pointer border-opacity-50 border-background-four items-center py-4 border-t-[0.5px] pl-5 text-icon-primary hover:text-white" onClick={logout}>
             <MdLogout size={20} className="mr-4" />
             {isExpand && <p>Sair</p>}
           </div>
