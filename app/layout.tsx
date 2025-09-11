@@ -4,6 +4,8 @@ import { Sora } from 'next/font/google'
 import QueryProvider from '@/domains/queryProvider'
 import { ToastProvider } from '@/domains/toasterProvider'
 import { AuthProvider } from '@/contexts/authContext'
+import 'react-date-range/dist/styles.css'
+import 'react-date-range/dist/theme/default.css'
 
 const sora = Sora({
   variable: '--font-primary',

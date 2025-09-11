@@ -1,13 +1,22 @@
 import { FiPlus } from 'react-icons/fi'
 import { KanbanItemCard } from './kanbanItemCard'
+import { Task } from '@/types/task'
 
 interface KanbanColumnProps {
   name: string
   count: number
-  value: string
+  color: string
+  tasks: Task[]
+  onClickTask?: (task: Task) => void
 }
 
-export const KanbanColumn = ({ name, count, value }: KanbanColumnProps) => {
+export const KanbanColumn = ({
+  name,
+  count,
+  color,
+  tasks,
+  onClickTask
+}: KanbanColumnProps) => {
   return (
     <div className="flex flex-col relative flex-1 p-7.5 gap-6 w-full bg-white border border-border-primary rounded-md">
       <div className="flex w-full items-center gap-3 justify-between">
@@ -21,14 +30,14 @@ export const KanbanColumn = ({ name, count, value }: KanbanColumnProps) => {
           <div
             className="absolute inset-0 rounded-md"
             style={{
-              backgroundColor: `var(--color-kanban-${value})`,
+              backgroundColor: `var(${color})`,
               opacity: 0.2,
             }}
           />
           <FiPlus
             size={16}
             style={{
-              color: `var(--color-kanban-${value})`,
+              color: `var(${color})`,
               position: 'relative',
             }}
           />
@@ -37,11 +46,12 @@ export const KanbanColumn = ({ name, count, value }: KanbanColumnProps) => {
       <div className="flex flex-col gap-5">
         <div
           className="w-full h-1 rounded-md"
-          style={{ backgroundColor: `var(--color-kanban-${value})` }}
+          style={{ backgroundColor: `var(${color})` }}
         />
         <div className="flex flex-col gap-2.5 h-full max-h-[600px] overflow-y-auto">
-          <KanbanItemCard value={value} />
-          <KanbanItemCard value={value} />
+          {tasks.map(task => (
+            <KanbanItemCard key={task.id} task={task} color={color} onClick={onClickTask} />
+          ))}
         </div>
       </div>
     </div>

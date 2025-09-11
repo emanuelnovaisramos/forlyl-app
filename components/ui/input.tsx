@@ -9,6 +9,7 @@ const inputVariants = cva(
     variants: {
       variant: {
         default: 'bg-background',
+        'no-styles': 'bg-transparent rounded-none border-0 p-0 focus:ring-0 focus:ring-offset-0',
       },
     },
     defaultVariants: {

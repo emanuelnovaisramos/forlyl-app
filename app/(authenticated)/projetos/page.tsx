@@ -34,7 +34,7 @@ export default function ProjectsPage() {
           {userProjects?.map((project: Project, index: number) => (
             <ProjectCard key={index} project={project} />
           ))}
-          <div className="border border-border-primary cursor-pointer w-[250px] flex justify-center items-center item min-h-full rounded-md">
+          <div className="border border-border-primary cursor-pointer w-[250px] min-h-[220px] flex justify-center items-center item h-full rounded-md">
             <FiPlus size={20} />
           </div>
         </div>

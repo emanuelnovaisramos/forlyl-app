@@ -1,48 +1,55 @@
 .gantt {
-    font-family: var(--font-primary) !important;
+  font-family: var(--font-primary) !important;
 
-    .gantt_scale_cell,
-    .gantt_task_content,
-    .gantt_row,
-    .gantt_grid_head_cell,
-    .gantt_grid_data .gantt_cell {
-        font-family: var(--font-primary) !important;
+  .gantt_task_line {
+    border-radius: 8px;
+    background-color: white !important;
+    border: 1px solid var(--color-border-primary) !important;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+      background-color: var(--color-border-primary);
     }
 
-    .gantt_scale_cell {
-        font-size: 12px;
-        color: var(--color-primary);
+    .gantt_task_progress {
+      background-color: var(--color-kanban-inProgress) !important;
+      opacity: 0.1;
     }
 
-    .gantt_task_line {
-        border-radius: 8px;
-        background-color: white !important;
-        border: 1px solid var(--color-border-primary) !important;
-
-        &::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 6px;
-            border-top-left-radius: 8px;
-            border-bottom-left-radius: 8px;
-            background-color: var(--color-next);
-        }
-
-        .gantt_task_progress {
-            background-color: #2563eb !important;
-            border-radius: 8px;
-        }
-
-        .gantt_task_content {
-            color: var(--color-primary);
-            font-weight: 600 !important;
-            font-size: 12px;
-            overflow: visible;
-            white-space: nowrap;
-            margin-left: 10px;
-        }
+    .gantt_task_content {
+      color: var(--color-primary);
+      font-weight: 600 !important;
+      font-size: 12px;
+      overflow: visible;
+      white-space: nowrap;
+      margin-left: 10px;
     }
+
+    &.status-toDo::before {
+      background-color: var(--color-kanban-toDo);
+      z-index: 10;
+    }
+
+    &.status-inProgress::before {
+      background-color: var(--color-kanban-inProgress);
+      z-index: 10;
+    }
+
+    &.status-done::before {
+      background-color: var(--color-kanban-done);
+      z-index: 10;
+    }
+
+    &.status-overdue::before {
+      background-color: var(--color-kanban-overdue);
+      z-index: 10;
+    }
+  }
 }

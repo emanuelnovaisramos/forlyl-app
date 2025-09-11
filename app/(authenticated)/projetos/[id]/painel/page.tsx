@@ -1,3 +1,4 @@
+'use client'
 import { DashboardCard } from '@/components/dashboard/dashboardCard'
 import { PageHeader } from '@/components/layout/pageHeader'
 import { FaRegFolder } from 'react-icons/fa'
@@ -9,6 +10,8 @@ import { DashboardProgressBar } from '@/components/dashboard/dashboardProgressBa
 import { LuChartLine } from 'react-icons/lu'
 import { DashboardTableUsersActivity } from '@/components/dashboard/dashboardTableUsersActivity'
 import { TaskListCard } from '@/components/tasks/taskListCard'
+import { useProject } from '@/contexts/projectContext'
+import { useAuth } from '@/contexts/authContext'
 
 const CARDS = [
   {
@@ -104,10 +107,16 @@ const USER_ACTIVITY_DATA = [
 ]
 
 export default function DashboardProjectPage() {
+  const { project } = useProject()
+  const { user } = useAuth()
+
   return (
     <div className="flex flex-col gap-7.5 p-7.5">
-      <PageHeader pageTitle="Curso online abc" subTitle="Bom dia, Joaquim." />
-      <div className="flex gap-5">
+      <PageHeader
+        pageTitle={project?.name as string}
+        subTitle={`Bem vindo, ${user?.name}!`}
+      />
+      <div className="grid grid-cols-4 gap-5 max-[1300px]:grid-cols-2 max-[700px]:grid-cols-1">
         {CARDS.map((card, index) => (
           <DashboardCard className="flex-grow" key={index} header={card.header}>
             <p className="text-3xl p-7.5 font-semibold">{card.content}</p>

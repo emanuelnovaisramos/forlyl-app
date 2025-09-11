@@ -1,4 +1,4 @@
-export const formatDate = (date?: Date | string) => {
+export const formatDateHideCurrentYear = (date?: Date | string) => {
   if (!date) return ''
 
   let d: Date
@@ -9,9 +9,12 @@ export const formatDate = (date?: Date | string) => {
     d = date
   }
 
+  const currentYear = new Date().getFullYear()
+  const isCurrentYear = d.getFullYear() === currentYear
+
   return d.toLocaleDateString('pt-BR', {
     day: 'numeric',
     month: 'long',
-    year: 'numeric',
+    year: isCurrentYear ? undefined : 'numeric', // 👈 só mostra se não for o ano atual
   })
 }

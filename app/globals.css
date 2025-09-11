@@ -36,8 +36,8 @@
   --color-done: #32D583;
   --color-done2: #2C58E4;
 
-  --color-kanban-todo: #FDB022;
-  --color-kanban-doing: #4486F4;
+  --color-kanban-toDo: #FDB022;
+  --color-kanban-inProgress: #4486F4;
   --color-kanban-done: #32D583;
   --color-kanban-overdue: #F97066;
 

@@ -1,22 +1,24 @@
 import { KanbanColumn } from './kanbanColumn'
+import { TASK_STATUS } from '@/constants/taskStatus'
+import { Task, TaskStatus } from '@/types/task'
 
-const kanbanColumns = [
-  { name: 'Não iniciado', value: 'todo', count: 26 },
-  { name: 'Em andamento', value: 'doing', count: 10 },
-  { name: 'Concluído', value: 'done', count: 14 },
-  { name: 'Em atraso', value: 'overdue', count: 5 },
-];
-
-
-export const Kanban = () => {
+export const Kanban = ({
+  tasksByStatus,
+  onEditTask,
+}: {
+  tasksByStatus: Record<TaskStatus, Task[]>
+  onEditTask?: (task: Task) => void
+}) => {
   return (
     <div className="grid grid-cols-4 items-start gap-5 max-[1500px]:grid-cols-2">
-      {kanbanColumns.map(column => (
+      {TASK_STATUS.map(column => (
         <KanbanColumn
           key={column.value}
-          name={column.name}
-          value={column.value}
-          count={column.count}
+          name={column.label}
+          color={column.color}
+          count={tasksByStatus[column.value]?.length || 0}
+          tasks={tasksByStatus[column.value] || []}
+          onClickTask={onEditTask}
         />
       ))}
     </div>

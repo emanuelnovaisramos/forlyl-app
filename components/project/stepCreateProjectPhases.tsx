@@ -1,8 +1,6 @@
 'use client'
 import { useState } from 'react'
 import { DateRange } from 'react-date-range'
-import 'react-date-range/dist/styles.css'
-import 'react-date-range/dist/theme/default.css'
 import pt from 'date-fns/locale/pt'
 import { addDays, format, parseISO } from 'date-fns'
 import { Button } from '../ui/button'
