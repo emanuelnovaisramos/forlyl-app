@@ -7,6 +7,7 @@ type ProjectContextType = {
   project: Project | undefined
   isLoading: boolean
   error: unknown
+  refetchInfosProject: () => void
 }
 
 const ProjectContext = createContext<ProjectContextType | undefined>(undefined)

@@ -3,10 +3,10 @@ import { API_URL } from '../config'
 import { parseCookies } from 'nookies'
 import { TOKEN_PATH } from '@/constants/tokens'
 
-const fetchGetUserProjects = async () => {
+const fetchGetProjectActivityByUser = async () => {
   const { [TOKEN_PATH]: TOKEN } = parseCookies()
 
-  const res = await fetch(`${API_URL}/project/user`, {
+  const res = await fetch(`${API_URL}/project-activity`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${TOKEN}`,
@@ -22,10 +22,9 @@ const fetchGetUserProjects = async () => {
   return data
 }
 
-export const useGetUserProjects = () => {
+export const useGetProjectActivityByUser = () => {
   return useQuery({
-    queryKey: ['userProjects'],
-    queryFn: fetchGetUserProjects,
-    staleTime: 1000 * 60 * 5,
+    queryKey: ['projectActivityByUser'],
+    queryFn: fetchGetProjectActivityByUser,
   })
 }

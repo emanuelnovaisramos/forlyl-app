@@ -29,10 +29,15 @@ import { useDeleteSubTask } from '@/api/subTask/deleteSubTask'
 
 interface SubTasksTableProps {
   subTasks: SubTask[]
-  mainTaskId: string
+  mainTaskId?: string
+  setSubTasks: (subTasks: SubTask[]) => void
 }
 
-export const SubTasksTable = ({ subTasks, mainTaskId }: SubTasksTableProps) => {
+export const SubTasksTable = ({
+  subTasks,
+  mainTaskId,
+  setSubTasks,
+}: SubTasksTableProps) => {
   const { showToast } = useToast()
   const { mutateAsync: createSubTask, isPending: isPendingCreate } =
     useCreateSubTask()
@@ -47,26 +52,37 @@ export const SubTasksTable = ({ subTasks, mainTaskId }: SubTasksTableProps) => {
 
   const toggleCompleted = async (id: string) => {
     const task = tasks.find(t => t.id === id)
-    if (!task) return
-
-    await updateSubTask({
-      id,
-      subTask: {
-        completed: !task.completed,
-      },
-    })
-      .then(updated => {
-        setTasks(prev =>
-          prev.map(t =>
-            t.id === id ? { ...t, completed: updated.completed } : t,
-          ),
-        )
+    if (!task || !task.id.startsWith('temp-')) {
+      // se tiver id real, atualiza no backend
+      if (!task) return
+      await updateSubTask({
+        id,
+        subTask: { completed: !task.completed },
       })
-      .catch(err => {
-        showToast({
-          message: err.message ? err.message : 'Erro ao atualizar status',
+        .then(updated => {
+          setTasks(prev =>
+            prev.map(t =>
+              t.id === id ? { ...t, completed: updated.completed } : t,
+            ),
+          )
         })
-      })
+        .catch(err => {
+          showToast({
+            message: err.message
+              ? err.message
+              : 'Erro ao atualizar status',
+          })
+        })
+      return
+    }
+
+    // se for tarefa temporária, só atualiza localmente
+    setTasks(prev =>
+      prev.map(t =>
+        t.id === id ? { ...t, completed: !t.completed } : t,
+      ),
+    )
+    setSubTasks(tasks)
   }
 
   const startEditing = (task: SubTask) => {
@@ -77,60 +93,90 @@ export const SubTasksTable = ({ subTasks, mainTaskId }: SubTasksTableProps) => {
   const saveEdit = (id: string) => {
     if (newTitle.trim() === '') return
 
-    updateSubTask({
-      id,
-      subTask: {
-        title: newTitle,
-      },
-    })
-      .then(updated => {
-        setTasks(prev =>
-          prev.map(t => (t.id === id ? { ...t, title: updated.title } : t)),
-        )
-        setEditingId(null)
-        setNewTitle('')
-      })
-      .catch(err => {
-        showToast({
-          message: err.message ? err.message : 'Erro ao atualizar subtarefa',
+    const task = tasks.find(t => t.id === id)
+    if (!task) return
+
+    if (!id.startsWith('temp-')) {
+      updateSubTask({ id, subTask: { title: newTitle } })
+        .then(updated => {
+          setTasks(prev =>
+            prev.map(t => (t.id === id ? { ...t, title: updated.title } : t)),
+          )
+          setEditingId(null)
+          setNewTitle('')
         })
-      })
+        .catch(err => {
+          showToast({
+            message: err.message
+              ? err.message
+              : 'Erro ao atualizar subtarefa',
+          })
+        })
+    } else {
+      // temporária
+      setTasks(prev =>
+        prev.map(t => (t.id === id ? { ...t, title: newTitle } : t)),
+      )
+      setEditingId(null)
+      setNewTitle('')
+      setSubTasks(tasks)
+    }
   }
 
   const handleDelete = (id: string) => {
-    deleteSubTask(id)
-      .then(() => {
-        setTasks(prev => prev.filter(t => t.id !== id))
-        showToast({ message: 'Subtarefa deletada com sucesso!' })
-      })
-      .catch(err => {
-        showToast({
-          message: err.message ? err.message : 'Erro ao deletar subtarefa',
+    if (!id.startsWith('temp-')) {
+      deleteSubTask(id)
+        .then(() => {
+          setTasks(prev => prev.filter(t => t.id !== id))
+          showToast({ message: 'Subtarefa deletada com sucesso!' })
         })
-      })
+        .catch(err => {
+          showToast({
+            message: err.message ? err.message : 'Erro ao deletar subtarefa',
+          })
+        })
+    } else {
+      // remove localmente
+      setTasks(prev => prev.filter(t => t.id !== id))
+      setSubTasks(tasks.filter(t => t.id !== id))
+    }
   }
 
   const addTask = async () => {
     if (newTitle.trim() === '') return
 
-    await createSubTask({
-      taskId: mainTaskId,
-      title: newTitle,
-      completed: newCompleted,
-    })
-      .then(res => {
-        setTasks(prev => [res, ...prev])
-        setNewTitle('')
-        setNewCompleted(false)
-        setAddingRow(false)
+    if (mainTaskId) {
+      await createSubTask({
+        taskId: mainTaskId,
+        title: newTitle,
+        completed: newCompleted,
       })
-      .catch(err => {
-        showToast({
-          message: err.message
-            ? err.message
-            : 'Erro ao criar tarefa secundária',
+        .then(res => {
+          setTasks(prev => [res, ...prev])
+          setNewTitle('')
+          setNewCompleted(false)
+          setAddingRow(false)
         })
-      })
+        .catch(err => {
+          showToast({
+            message: err.message
+              ? err.message
+              : 'Erro ao criar tarefa secundária',
+          })
+        })
+    } else {
+      // criar tarefa temporária
+      const newTask: SubTask = {
+        id: `temp-${Date.now()}`,
+        title: newTitle,
+        completed: newCompleted,
+      }
+      setTasks(prev => [newTask, ...prev])
+      setNewTitle('')
+      setNewCompleted(false)
+      setAddingRow(false)
+      setSubTasks?.([newTask, ...tasks])
+    }
   }
 
   return (

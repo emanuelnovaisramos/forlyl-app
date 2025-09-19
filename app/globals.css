@@ -26,6 +26,7 @@
   --bg-six: #F0F5FE;
   --bg-seven: #E9EAEB;
   --bg-eight: #2446D6;
+  --bg-destructive: #EF4444;
 
   --bg-checkbox: #4486F4;
   
@@ -50,6 +51,7 @@ body {
   color: var(--color-primary);
   background-color: var(--bg-primary);
   font-family: var(--font-primary), sans-serif;
+  pointer-events: auto !important;
   .date-range-no-click{
     .rdrMonth{
       pointer-events: none;

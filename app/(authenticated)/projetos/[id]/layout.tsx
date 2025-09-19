@@ -32,6 +32,7 @@ export default function ProjectLayout({
     data: projectInfos,
     isLoading: isLoadingProject,
     error: errorProject,
+    refetch: refetchInfosProject
   } = useGetProject(projectId!)
 
   useEffect(() => {
@@ -49,6 +50,7 @@ export default function ProjectLayout({
         project: projectInfos,
         isLoading: isLoadingProject,
         error: errorProject,
+        refetchInfosProject: refetchInfosProject
       }}
     >
       <div className="flex w-full h-full relative overflow-hidden">

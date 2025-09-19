@@ -30,9 +30,10 @@ import { useProject } from '@/contexts/projectContext'
 import { Button } from '../ui/button'
 import { useToast } from '@/domains/toasterProvider'
 import { useCreateTask } from '@/api/task/createTask'
-import { Task, TaskStatus } from '@/types/task'
+import { SubTask, Task, TaskStatus } from '@/types/task'
 import { useEditTask } from '@/api/task/editTask'
 import { SubTasksTable } from './subTasksTable'
+import { useCreateSubTask } from '@/api/subTask/createSubTask'
 
 const taskForm = z.object({
   name: z
@@ -67,8 +68,11 @@ export const TaskForm = ({
   const { mutateAsync: createTask, isPending: isPendingCreateTask } =
     useCreateTask()
   const { mutateAsync: updateTask } = useEditTask()
+  const { mutateAsync: createSubTasks, isPending: isCreatingSubTasks } =
+    useCreateSubTask()
   const { user } = useAuth()
   const { project } = useProject()
+  const [subTasksPending, setSubTasksPending] = useState<SubTask[]>([])
   const form = useForm<TaskFormValues>({
     resolver: zodResolver(taskForm),
     defaultValues: {
@@ -100,6 +104,25 @@ export const TaskForm = ({
   const dueDate = form.watch('dueDate')
   const [openRangePicker, setOpenRangePicker] = useState(false)
 
+  const handleCreateSubTasks = async (taskId: string) => {
+    if (!subTasksPending.length) return
+
+    for (const subTask of subTasksPending) {
+      try {
+        await createSubTasks({
+          taskId,
+          title: subTask.title,
+          completed: subTask.completed,
+        })
+      } catch {
+        showToast({
+          type: 'error',
+          message: `Erro ao criar subtarefa "${subTask.title}"`,
+        })
+      }
+    }
+  }
+
   const onSubmit = async (data: TaskFormValues) => {
     try {
       if (defaultValues) {
@@ -124,6 +147,10 @@ export const TaskForm = ({
           projectId: project?.id || '',
         })
 
+        if (subTasksPending.length > 0) {
+          await handleCreateSubTasks(newTask.id)
+        }
+
         showToast({
           type: 'success',
           message: 'Tarefa criada com sucesso!',
@@ -147,6 +174,10 @@ export const TaskForm = ({
       })
     }
   }
+
+  const now = new Date()
+  const startOfYear = new Date(now.getFullYear(), 0, 1)
+  const endOfTwoYears = new Date(now.getFullYear() + 2, 11, 31)
 
   return (
     <Drawer open={openSidebar} onOpenChange={setOpenSidebar} direction="right">
@@ -192,7 +223,7 @@ export const TaskForm = ({
               </div>
               {(!defaultValues || form.formState.isDirty) && (
                 <Button
-                  disabled={isPendingCreateTask}
+                  disabled={isPendingCreateTask || isCreatingSubTasks}
                   className="w-max font-bold p-2"
                   variant="outline"
                 >
@@ -260,7 +291,8 @@ export const TaskForm = ({
                         locale={pt}
                         rangeColors={['#2C58E4']}
                         showDateDisplay={false}
-                        minDate={new Date()}
+                        minDate={startOfYear}
+                        maxDate={endOfTwoYears}
                       />
                     </Popover.Content>
                   </Popover.Root>
@@ -416,14 +448,13 @@ export const TaskForm = ({
                 )
               }}
             />
-            {defaultValues && (
-              <div className="flex w-full mt-7.5">
-                <SubTasksTable
-                  subTasks={defaultValues.subTasks}
-                  mainTaskId={defaultValues.id}
-                />
-              </div>
-            )}
+            <div className="flex w-full mt-7.5">
+              <SubTasksTable
+                subTasks={defaultValues ? defaultValues.subTasks : []}
+                mainTaskId={defaultValues ? defaultValues.id : undefined}
+                setSubTasks={setSubTasksPending}
+              />
+            </div>
           </form>
         </Form>
       </DrawerContent>

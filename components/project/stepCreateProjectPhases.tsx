@@ -12,8 +12,10 @@ import { HiOutlinePlusSm } from 'react-icons/hi'
 
 export const StepCreateProductPhases = ({
   handleSubmit,
+  isPending
 }: {
   handleSubmit: (phases: CreateProjectPhase[]) => void
+  isPending?: boolean
 }) => {
   const today = new Date()
   const formatDate = (date: Date) => format(date, 'yyyy-MM-dd')
@@ -197,7 +199,7 @@ export const StepCreateProductPhases = ({
               </p>
             </div>
           )}
-          <Button className="w-max font-bold" onClick={handleClickSubmit}>
+          <Button className="w-max font-bold" onClick={handleClickSubmit} disabled={isPending}>
             Proximo
           </Button>
         </div>

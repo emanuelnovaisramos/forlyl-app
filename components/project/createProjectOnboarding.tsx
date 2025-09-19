@@ -10,12 +10,19 @@ import {
   StepCreateProjectPublic,
 } from './stepCreateProjectPublic'
 import { ProjectInfos, StepCreateProjectInfos } from './stepCreateProjecIinfos'
-import { CreateProjectParams, CreateProjectPhase, useCreateProject } from '@/api/project/createProject'
+import {
+  CreateProjectParams,
+  CreateProjectPhase,
+  useCreateProject,
+} from '@/api/project/createProject'
+import { Project } from '@/types/project'
 
 export const CreateProjectOnboarding = ({
   isFirst = false,
+  callBackCreate
 }: {
   isFirst?: boolean
+  callBackCreate?: (project: Project) => void
 }) => {
   const { mutateAsync: createProject, isPending: isPendingCreate } =
     useCreateProject()
@@ -37,7 +44,7 @@ export const CreateProjectOnboarding = ({
     if (!productInfos || !productInfosPublic) return
 
     await createProject(createProjectParams)
-      .then(() => {
+      .then((res) => {
         showToast({
           message: 'Produto criado com sucesso!',
           type: 'success',
@@ -45,6 +52,9 @@ export const CreateProjectOnboarding = ({
         if (isFirst) {
           route.push(HOME_ROUTE)
           setIsRedirect(true)
+        }
+        if(callBackCreate){
+          callBackCreate(res)
         }
       })
       .catch(error => {
@@ -99,6 +109,7 @@ export const CreateProjectOnboarding = ({
             })
           }
         }}
+        isPending={isPendingCreate || isRedirect}
       />
     ),
   }
@@ -111,7 +122,7 @@ export const CreateProjectOnboarding = ({
         {steps[currentStep]}
       </div>
       <div className="flex absolute z-50 bottom-[10px] text-third">
-        {currentStep}/{totalSteps}
+        {isFirst ? currentStep : currentStep - 1}/{totalSteps}
       </div>
     </div>
   )

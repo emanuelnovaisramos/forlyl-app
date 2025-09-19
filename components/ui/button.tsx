@@ -13,7 +13,11 @@ const buttonVariants = cva(
       variant: {
         default:
           'bg-background-secondary text-sm w-full text-white px-4 py-[13px] rounded-md shadow hover:opacity-90',
-        outline: "border border-background-secondary rounded-md text-background-secondary bg-transparent px-4 py-[13px] hover:opacity-90"
+        destructive:
+          'bg-background-destructive text-sm w-full text-white px-4 py-[13px] rounded-md shadow hover:opacity-90',
+        outline:
+          'border border-background-secondary rounded-md text-background-secondary bg-transparent px-4 py-[13px] hover:opacity-90',
+        'no-style': 'border-none bg-transparent p-0',
       },
     },
     defaultVariants: {

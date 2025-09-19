@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react'
 import { AiOutlineLoading } from 'react-icons/ai'
 
 export default function Page() {
-  const { project } = useProject()
+  const { project, refetchInfosProject } = useProject()
   const { showToast } = useToast()
   const {
     data: tasks,
@@ -69,6 +69,7 @@ export default function Page() {
 
   const handleCallBackForm = () => {
     refetchTasks()
+    refetchInfosProject()
     setOpenSidebarTask(false)
     setEditTask(undefined)
   }
